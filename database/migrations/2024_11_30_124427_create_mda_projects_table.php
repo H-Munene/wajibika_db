@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('mda_project_name');
             $table->foreignId('status_id')->constrained();
             $table->foreignId('state_department_id')->constrained();
-            $table->foreignId('county_id')->constrained();
+            $table->foreignId('county_id')->constrained()->nullable();
             $table->timestamps();
         });
     }

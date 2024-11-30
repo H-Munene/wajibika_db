@@ -59,7 +59,8 @@ class CountySeeder extends Seeder
             ['county_name' => 'Migori', 'region_id' => 6],
             ['county_name' => 'Kisii', 'region_id' => 6],
             ['county_name' => 'Nyamira', 'region_id' => 6],
-            ['county_name' => 'Nairobi City', 'region_id' => 4]
+            ['county_name' => 'Nairobi City', 'region_id' => 4],
+            ['county_name' => 'Inter-County', 'region_id' => 9],
         ];
 
         DB::table('counties')->insert($counties);
