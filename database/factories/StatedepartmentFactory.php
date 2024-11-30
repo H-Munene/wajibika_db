@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class StatedepartmentFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * Define the model's default status.
      *
      * @return array<string, mixed>
      */

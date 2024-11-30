@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\Response;
-use App\Models\state;
+use App\Models\status;
 use App\Models\User;
 
 class StatePolicy
@@ -19,7 +19,7 @@ class StatePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, state $state): bool
+    public function view(User $user, status $state): bool
     {
         return false;
     }
@@ -35,7 +35,7 @@ class StatePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, state $state): bool
+    public function update(User $user, status $state): bool
     {
         return false;
     }
@@ -43,7 +43,7 @@ class StatePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, state $state): bool
+    public function delete(User $user, status $state): bool
     {
         return false;
     }
@@ -51,7 +51,7 @@ class StatePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, state $state): bool
+    public function restore(User $user, status $state): bool
     {
         return false;
     }
@@ -59,7 +59,7 @@ class StatePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, state $state): bool
+    public function forceDelete(User $user, status $state): bool
     {
         return false;
     }

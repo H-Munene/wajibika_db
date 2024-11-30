@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('mda_projects_oag_audited', function (Blueprint $table) {
             $table->id();
             $table->string('mda_project_name');
-            $table->foreignId('status_id')->constrained();
-            $table->foreignId('state_department_id')->constrained();
-            $table->foreignId('county_id')->constrained()->nullable();
+            $table->foreignId('status_id');
+            $table->foreignId('statedepartment_id')->constrained();
+            $table->foreignId('county_id')->constrained();
             $table->timestamps();
         });
     }

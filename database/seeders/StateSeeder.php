@@ -18,6 +18,6 @@ class StateSeeder extends Seeder
           ['status_name' => 'Incompleted'],
           ['status_name' => 'Non-Operational'],
         ];
-        DB::table('states')->insert($status);
+        DB::table('status')->insert($status);
     }
 }

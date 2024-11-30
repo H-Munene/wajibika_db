@@ -20,7 +20,8 @@ class RegionSeeder extends Seeder
             ['region_name' => 'North Eastern Region'],
             ['region_name' => 'Nyanza Region'],
             ['region_name' => 'Rift Valley Region'],
-            ['region_name' => 'Western Region']
+            ['region_name' => 'Western Region'],
+            ['region_name' => 'Inter-County'],
         ];
         DB::table('regions')->insert($regions);
     }

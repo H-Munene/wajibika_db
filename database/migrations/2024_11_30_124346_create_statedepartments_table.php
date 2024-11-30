@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('statedepartments', function (Blueprint $table) {
             $table->id();
             $table->string('statedepartment_name');
-            $table->double('cumulative_contracts_amount');
-            $table->double('cumulative_amounts_paid');
+            $table->string('cumulative_contracts_amount');
+            $table->string('cumulative_amounts_paid');
             $table->timestamps();
         });
     }

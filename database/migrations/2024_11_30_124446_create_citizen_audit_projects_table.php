@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('project_name');
             $table->string('amount_allocated');
-            $table->timestamps('amount_paid');
+            $table->string('amount_paid');
             $table->string('project_status');
             $table->foreignId('county_id')->constrained();
             $table->timestamps();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('citizen_audit_projects');
+        Schema::dropIfExists('citizen_audited_projects');
     }
 };

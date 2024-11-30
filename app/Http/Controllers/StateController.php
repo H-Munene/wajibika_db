@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\state;
+use App\Models\status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorestateRequest;
 use App\Http\Requests\UpdatestateRequest;
@@ -36,7 +36,7 @@ class StateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(state $state)
+    public function show(status $state)
     {
         //
     }
@@ -44,7 +44,7 @@ class StateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(state $state)
+    public function edit(status $state)
     {
         //
     }
@@ -52,7 +52,7 @@ class StateController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatestateRequest $request, state $state)
+    public function update(UpdatestateRequest $request, status $state)
     {
         //
     }
@@ -60,7 +60,7 @@ class StateController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(state $state)
+    public function destroy(status $state)
     {
         //
     }
