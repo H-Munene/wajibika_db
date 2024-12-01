@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -16,10 +17,18 @@ class LoginController extends Controller
         $credentials = $request->only("email", "password");
 
         if (!Auth::validate($credentials)) {
-            return response()->json([
-                'message' => 'Incorrect Credentials'], 401);
-        }
+            //if email is found but invalid password doesn't match
 
+            $email_is_in_DB = DB::table('users')->where('email', $request->email)->get();
+            if (!$email_is_in_DB->isEmpty()) {
+                return response()->json([
+                    'message' => 'Incorrect Credentials'], 401);
+            } else if ($email_is_in_DB->isEmpty()) {
+                //email is not present in DB
+                return response()->json([
+                    'message' => 'Email is not registered with us'], 401);
+            }
+        }
         /*
          * Auth::getProvider():
          *  This gets the user provider configured for the authentication guard
@@ -42,6 +51,7 @@ class LoginController extends Controller
         //send login email
         //$user->notify(new LoginConfirmationEmail($user));
     }
+
     public function index()
     {
         //
