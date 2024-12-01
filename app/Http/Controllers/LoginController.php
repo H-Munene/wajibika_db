@@ -17,8 +17,7 @@ class LoginController extends Controller
         $credentials = $request->only("email", "password");
 
         if (!Auth::validate($credentials)) {
-            //if email is found but invalid password doesn't match
-
+            //if email is found but invalid password
             $email_is_in_DB = DB::table('users')->where('email', $request->email)->get();
             if (!$email_is_in_DB->isEmpty()) {
                 return response()->json([
