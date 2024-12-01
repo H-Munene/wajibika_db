@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Notifications\RegistrationConfirmationEmail;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
@@ -25,7 +26,9 @@ class RegisterController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
-
+            //send registration email confirmation
+            $user->notify(new RegistrationConfirmationEmail($user));
+            event(new Registered($user));
             // Return success response
             return response()->json([
                 'message' => 'Registration Successful',
