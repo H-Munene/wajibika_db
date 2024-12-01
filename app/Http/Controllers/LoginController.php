@@ -29,19 +29,8 @@ class LoginController extends Controller
                     'message' => 'Email is not registered with us'], 401);
             }
         }
-        /*
-         * Auth::getProvider():
-         *  This gets the user provider configured for the authentication guard
-         *  being used (typically the default guard, which is users)
-         *
-         * retrieveByCredentials($credentials):
-            This method fetches a user from the user provider based on the given credentials.
-            The $credentials array usually includes data like email and password.
-         */
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
-
         Auth::login($user);
-
         return response()->json([
             'user' => $user,
             'message' => 'Login Successful',
