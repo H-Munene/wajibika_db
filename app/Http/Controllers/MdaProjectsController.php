@@ -6,6 +6,7 @@ use App\Models\mda_projects;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Storemda_projectsRequest;
 use App\Http\Requests\Updatemda_projectsRequest;
+use Illuminate\Support\Facades\DB;
 
 class MdaProjectsController extends Controller
 {
@@ -14,7 +15,11 @@ class MdaProjectsController extends Controller
      */
     public function index()
     {
-        //
+        //display all mda projects
+        $mda_projects = DB::table('mda_projects_oag_audited')->get();
+
+        return $mda_projects;
+
     }
 
     /**

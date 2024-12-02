@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CitizenAuditProjectsController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MdaProjectsController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -10,10 +12,18 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
 
+//get all projects
+Route::get('/mda-projects', [MdaProjectsController::class, 'index']);
+Route::get('/citizen-audited-projects', [CitizenAuditProjectsController::class, 'index']);
+
+//get project by county id
+Route::get('/citizen-audited-projects/{county_name}', [CitizenAuditProjectsController::class, 'getAllFromSpecificCounty']);
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+//emails
 Route::get('/email/verify', function () {
     if (Auth::user()->hasVerifiedEmail()) {
         return response()->json(['message' => 'Email already verified.']);
