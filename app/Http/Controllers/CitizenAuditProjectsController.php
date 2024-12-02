@@ -6,6 +6,7 @@ use App\Models\citizen_audit_projects;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Storecitizen_audit_projectsRequest;
 use App\Http\Requests\Updatecitizen_audit_projectsRequest;
+use Illuminate\Support\Facades\DB;
 
 class CitizenAuditProjectsController extends Controller
 {
@@ -14,7 +15,10 @@ class CitizenAuditProjectsController extends Controller
      */
     public function index()
     {
-        //
+        //get all citizen
+        $citizen_mda_projects = DB::table('citizen_audited_projects')->get();
+
+        return $citizen_mda_projects;
     }
 
     /**
