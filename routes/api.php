@@ -17,7 +17,7 @@ Route::get('/mda-projects', [MdaProjectsController::class, 'index']);
 Route::get('/citizen-audited-projects', [CitizenAuditProjectsController::class, 'index']);
 
 //get project by county id
-Route::get('/citizen-audited-projects/{county_id}', [CitizenAuditProjectsController::class, 'getAllFromSpecificCounty']);
+Route::get('/citizen-audited-projects/{county_name}', [CitizenAuditProjectsController::class, 'getAllFromSpecificCounty']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();
