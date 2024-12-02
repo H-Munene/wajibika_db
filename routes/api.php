@@ -12,8 +12,12 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
 
+//get all projects
 Route::get('/mda-projects', [MdaProjectsController::class, 'index']);
 Route::get('/citizen-audited-projects', [CitizenAuditProjectsController::class, 'index']);
+
+//get project by county id
+Route::get('/citizen-audited-projects/{county_id}', [CitizenAuditProjectsController::class, 'getAllFromSpecificCounty']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();

@@ -6,6 +6,7 @@ use App\Models\citizen_audit_projects;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Storecitizen_audit_projectsRequest;
 use App\Http\Requests\Updatecitizen_audit_projectsRequest;
+use http\Env\Request;
 use Illuminate\Support\Facades\DB;
 
 class CitizenAuditProjectsController extends Controller
@@ -19,6 +20,17 @@ class CitizenAuditProjectsController extends Controller
         $citizen_mda_projects = DB::table('citizen_audited_projects')->get();
 
         return $citizen_mda_projects;
+    }
+
+    public function getAllFromSpecificCounty($county_id)
+    {
+        $citizen_mda_projects_in_county_id = DB::table('citizen_audited_projects')->where('county_id', $county_id)->get();
+
+//        return $citizen_mda_projects_in_county_id->filter(function ($project) {
+//            global $request;
+//            return $project->where('county_id', $request->county_id);
+//        });
+        return $citizen_mda_projects_in_county_id;
     }
 
     /**
