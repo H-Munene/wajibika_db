@@ -22,14 +22,15 @@ class CitizenAuditProjectsController extends Controller
         return $citizen_mda_projects;
     }
 
+    //projects by county name
     public function getAllFromSpecificCounty($county_name)
     {
         return DB::table('citizen_audited_projects')
             ->join('counties', 'citizen_audited_projects.county_id', '=', 'counties.id')
             ->join('regions', 'counties.region_id', '=', 'regions.id')
+            ->select('regions.region_name', 'counties.county_name', 'citizen_audited_projects.project_name', 'citizen_audited_projects.amount_allocated', 'citizen_audited_projects.amount_paid')
             ->where('counties.county_name', $county_name)->get();
     }
-
 
     /**
      * Show the form for creating a new resource.
