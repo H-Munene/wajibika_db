@@ -26,6 +26,8 @@ class HomeController extends Controller
         //value lost
         $value_lost = "96547300000";
         return response()->json([
+            "mda_title" => "Stalled Projects Under Ministries, Departments and Agencies (MDAs)",
+            "ctz_title" => "Citizen-Led Oversight on the status of projects countrywide",
             "totalcumulativeContractsAmount(Kshs.)" => $cca,
             "totalcumulativeAmountsPaid (Kshs.)" => $cap,
             "projectsHighlightedmda" => $mda_projects_count,
@@ -35,7 +37,7 @@ class HomeController extends Controller
             'projectsHighlightedctz' => $citizen_projects_count,
             'source_ctz' => $source,
             'asOfctz' => $as_of_ctz,
-        ], 201);
+        ], 200);
 
     }
 
