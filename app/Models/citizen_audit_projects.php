@@ -9,4 +9,9 @@ class citizen_audit_projects extends Model
 {
     /** @use HasFactory<\Database\Factories\CitizenAuditProjectsFactory> */
     use HasFactory;
+
+    public function county()
+    {
+        return $this->belongsTo(county::class);
+    }
 }
