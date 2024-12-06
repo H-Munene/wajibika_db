@@ -21,6 +21,7 @@ class RegisterController extends Controller
         try {
             // Validate the request data
             $request->validated();
+
             // Create the user
             $user = User::create([
                 'email' => $request->email,
@@ -37,13 +38,13 @@ class RegisterController extends Controller
             Log::error($e->validator->errors());
             // Return validation error response
             return response()->json([
-                'errors' => $e->validator->errors()->all(),], 422);
+                'message' => $e->validator->errors()->first(),]);
         } catch (\Exception $e) {
             // Log the exception message
             Log::error($e->getMessage());
             // Return general error response
             return response()->json([
-                'message' => $e->getMessage(),], 400);
+                'message' => $e->getMessage(),]);
         }
     }
 

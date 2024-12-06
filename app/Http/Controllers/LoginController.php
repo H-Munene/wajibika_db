@@ -14,30 +14,31 @@ class LoginController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $credentials = $request->only("email", "password");
+        $credentials = $request->only('email', 'password');
 
-        if (!Auth::validate($credentials)) {
-            //if email is found but invalid password
-            $email_is_in_DB = DB::table('users')->where('email', $request->email)->get();
-            if (!$email_is_in_DB->isEmpty()) {
+        if (!Auth::attempt($credentials)) {
+            $isEmailRegistered = DB::table('users')->where('email', $request->email)->get();
+
+            if (!$isEmailRegistered->isEmpty()) {
                 return response()->json([
-                    'message' => 'Incorrect Credentials'], 401);
-            } else if ($email_is_in_DB->isEmpty()) {
-                //email is not present in DB
+                    'message' => 'Invalid credentials'
+                ], 401);
+            } else if ($isEmailRegistered->isEmpty()) {
                 return response()->json([
-                    'message' => 'Email is not registered with us'], 401);
+                    'message' => 'Email not registered with us'
+                ], 401);
             }
         }
-        $user = Auth::getProvider()->retrieveByCredentials($credentials);
-        Auth::login($user);
+
+        $user = Auth::user();
+
+        $token = $user->createToken('token-name')->plainTextToken; // Consider using a more secure token generation method
+
         return response()->json([
             'user' => $user,
-            'message' => 'Login Successful',
-            'token' => $user->createToken('token-name')->plainTextToken,
-        ], 201);
-
-        //send login email
-        //$user->notify(new LoginConfirmationEmail($user));
+            'token' => $token,
+            'message' => 'Login successful'
+        ]);
     }
 
     public function index()
