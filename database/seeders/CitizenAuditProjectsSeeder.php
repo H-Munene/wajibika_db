@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+
 class CitizenAuditProjectsSeeder extends Seeder
 {
     /**
@@ -136,6 +137,6 @@ class CitizenAuditProjectsSeeder extends Seeder
             ['project_name' => 'Dedan Kimathi University Comprehensive Cancer Center', 'amount_allocated' => 'undisclosed', 'amount_paid' => 'undisclosed', 'project_status' => 'Not Done', 'county_id' => 13],
         ];
 
-        DB::table('citizen_audited_projects')->insert($cap_projects);
+        DB::table('citizen_audit_projects')->insert($cap_projects);
     }
 }

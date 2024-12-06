@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\citizen_audit_projects;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Storecitizen_audit_projectsRequest;
 use App\Http\Requests\Updatecitizen_audit_projectsRequest;
-use http\Env\Request;
+use App\Models\county;
 use Illuminate\Support\Facades\DB;
 
 class CitizenAuditProjectsController extends Controller
@@ -16,10 +15,25 @@ class CitizenAuditProjectsController extends Controller
      */
     public function index()
     {
-        //get all citizen
-        $citizen_mda_projects = DB::table('citizen_audited_projects')->get();
+        $counties = county::with(['projects'])->get();
 
-        return $citizen_mda_projects;
+        $formattedData = $counties->filter(function ($county) {
+            return $county->projects->count() > 0;
+        })->map(function ($county) {
+            return [
+                'County' => $county->county_name,
+                'Projects' => $county->projects->map(function ($project) {
+                    return [
+                        'name' => $project->project_name,
+                        'amount allocated' => $project->amount_allocated,
+                        'amount paid' => $project->amount_paid,
+                        'status' => $project->project_status,
+                    ];
+                })->toArray(),
+            ];
+        })->toArray();
+
+        return response()->json($formattedData);
     }
 
     //projects by county name
