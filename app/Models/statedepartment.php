@@ -9,4 +9,9 @@ class statedepartment extends Model
 {
     /** @use HasFactory<\Database\Factories\StatedepartmentFactory> */
     use HasFactory;
+
+    public function projects()
+    {
+        return $this->hasMany(mda_projects::class);
+    }
 }

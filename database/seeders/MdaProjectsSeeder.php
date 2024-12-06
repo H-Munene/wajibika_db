@@ -17,7 +17,7 @@ class MdaProjectsSeeder extends Seeder
             // Interior and Citizen Services
             ['mda_project_name' => 'Construction of DCC office block', 'county_id' => 12, 'status_id' => 1, 'statedepartment_id' => 1], // Meru
             ['mda_project_name' => 'Construction of Tigania East Sub-County office block', 'county_id' => 12, 'status_id' => 1, 'statedepartment_id' => 1], // Meru
-            ['mda_project_name' => 'Construction of Magunga District Headquarters Suba South Sub-County', 'county_id' => 43, 'status_id' => 1, 'statedepartment_id' =>1 ], // Homa Bay
+            ['mda_project_name' => 'Construction of Magunga District Headquarters Suba South Sub-County', 'county_id' => 43, 'status_id' => 1, 'statedepartment_id' => 1], // Homa Bay
             ['mda_project_name' => 'Delayed completion of Mwea West Sub-County Headquarters', 'county_id' => 20, 'status_id' => 1, 'statedepartment_id' => 1], // Kirinyaga
             ['mda_project_name' => 'Construction of 100 PAX hostel block at Kenya School of Adventure and Leadership', 'county_id' => 12, 'status_id' => 1, 'statedepartment_id' => 1], // Meru
 
@@ -93,6 +93,6 @@ class MdaProjectsSeeder extends Seeder
             ['mda_project_name' => 'Delayed completion of Transport Data Centre contract awarded in 2014', 'county_id' => 48, 'status_id' => 1, 'statedepartment_id' => 21], // Inter-County
         ];
 
-        DB::table('mda_projects_oag_audited')->insert($projects);
+        DB::table('mda_projects')->insert($projects);
     }
 }
