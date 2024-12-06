@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
         $cca = "13716569830";
         $cap = "3100222841";
-        $mda_projects_count = DB::table('mda_projects_oag_audited')->count();
+        $mda_projects_count = DB::table('mda_projects')->count();
         $asOfmda = "30 June, 2023";
         //projects count
         $citizen_projects_count = DB::table('citizen_audited_projects')->count();

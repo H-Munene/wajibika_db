@@ -6,6 +6,7 @@ use App\Models\mda_projects;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Storemda_projectsRequest;
 use App\Http\Requests\Updatemda_projectsRequest;
+use App\Models\statedepartment;
 use Illuminate\Support\Facades\DB;
 
 class MdaProjectsController extends Controller
@@ -15,19 +16,33 @@ class MdaProjectsController extends Controller
      */
     public function index()
     {
-        //display all mda projects
-        $mda_projects = DB::table('mda_projects_oag_audited')->get();
+        $stateDepartments = StateDepartment::with(['projects' => function ($query) {
+            $query->with('county');
+        }])->get();
 
-        return $mda_projects;
+        $formattedData = $stateDepartments->map(function ($department) {
+            return [
+                'stateDepartment' => $department->statedepartment_name,
+                'cumulativeContractAmounts (Kshs.)' => $department->cumulative_contracts_amount,
+                'cumulativeAmountPaid' => $department->cumulative_amounts_paid,
+                'projects' => $department->projects->map(function ($project) {
+                    return [
+                        'name' => $project->mda_project_name,
+                        'location' => $project->county->county_name,
+                    ];
+                })->toArray(),
+            ];
+        })->toArray();
 
+        return response()->json($formattedData);
     }
 
     public function getProjectsByStateDepartment($statedepartment)
     {
-        return DB::table('mda_projects_oag_audited')
-            ->join('statedepartments', 'mda_projects_oag_audited.statedepartment_id', '=', 'statedepartments.id')
-            ->join('counties', 'mda_projects_oag_audited.county_id', '=', 'counties.id')
-            ->select('counties.county_name', 'statedepartments.statedepartment_name', 'mda_projects_oag_audited.mda_project_name', 'statedepartments.cumulative_contracts_amount', 'statedepartments.cumulative_amounts_paid')
+        DB::table('mda_projects')
+            ->join('statedepartments', 'mda_projects.statedepartment_id', '=', 'statedepartments.id')
+            ->join('counties', 'mda_projects.county_id', '=', 'counties.id')
+            ->select('counties.county_name', 'statedepartments.statedepartment_name', 'mda_projects.mda_project_name', 'statedepartments.cumulative_contracts_amount', 'statedepartments.cumulative_amounts_paid')
             ->where('statedepartments.statedepartment_name', $statedepartment)->get();
     }
 
