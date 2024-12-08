@@ -16,10 +16,7 @@ class CitizenAuditProjectsController extends Controller
     public function index()
     {
         $counties = county::with(['projects'])->get();
-
-        $formattedData = $counties->filter(function ($county) {
-            return $county->projects->count() > 0;
-        })->map(function ($county) {
+        $formattedData = $counties->map(function ($county) {
             return [
                 'County' => $county->county_name,
                 'Projects' => $county->projects->map(function ($project) {
@@ -27,7 +24,7 @@ class CitizenAuditProjectsController extends Controller
                         'name' => $project->project_name,
                         'amount allocated' => $project->amount_allocated,
                         'amount paid' => $project->amount_paid,
-                        'status' => $project->project_status,
+                        'status' => $project->project_status, // Check for null
                     ];
                 })->toArray(),
             ];
